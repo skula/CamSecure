@@ -1,12 +1,14 @@
 package com.skula.camsecure.ws;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.annotation.Resource;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 
 import com.skula.camsecure.models.Snapshot;
+import com.skula.camsecure.services.DatabaseService;
 import com.skula.camsecure.utils.Logger;
 
 @WebService(endpointInterface = "com.skula.camsecure.ws.ICamSecure")
@@ -18,7 +20,20 @@ public class CamSecureImpl implements ICamSecure {
 
 	@Override
 	public String takeSnapshot(Snapshot snapshot) {
+		
+		
+		
 		if (isAuthentified(snapshot)) {
+			
+			/*try {
+				DatabaseService dbs = new DatabaseService();
+			} catch (ClassNotFoundException e1) {
+				Logger.log("ERROR", e1.getMessage());
+			} catch (SQLException e2) {
+				Logger.log("ERROR", e2.getMessage());
+				e2.printStackTrace();
+			}
+			*/
 			try {
 				Process p = Runtime.getRuntime().exec(SCRIPT_PATH + " " + snapshot.getMailAddress());
 				Logger.log("INFO", "capture de l'utilisateur '" + snapshot.getLogin() +"' pour l'adresse '" + snapshot.getMailAddress() + ".");
