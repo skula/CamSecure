@@ -11,7 +11,7 @@ public class DatabaseService {
 
 	public DatabaseService() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
-		this.connection = DriverManager.getConnection("jdbc:mysql://192.168.1.62:3306/camsecure", "root", "root");
+		this.connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/camsecure", "root", "root");
 	}
 
 	public boolean isAuthentified(String login, String passwd) {
